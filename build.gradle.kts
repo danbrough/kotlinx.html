@@ -213,6 +213,8 @@ kotlin {
         val nativeTargets = listOf(
             "mingwX64",
             "linuxX64",
+            "linuxArm64",
+            "linuxArm32Hfp",
             "iosX64",
             "iosArm64",
             "iosArm32",
@@ -366,7 +368,7 @@ if (!signingKey.isNullOrBlank()) {
     project.ext["signing.gnupg.passphrase"] = signingKeyPassphrase
 
     signing {
-        useGpgCmd()
+       // useGpgCmd()
         sign(publishing.publications)
     }
 }
