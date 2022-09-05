@@ -13,8 +13,8 @@ plugins {
     id("signing")
 }
 
-group = "org.jetbrains.kotlinx"
-version = "0.7.5-SNAPSHOT"
+group = "org.danbrough.kotlinx"
+version = "0.7.5"
 
 buildscript {
     dependencies {
@@ -139,6 +139,8 @@ kotlin {
 
     mingwX64()
     linuxX64()
+    linuxArm32Hfp()
+    linuxArm64()
     iosX64()
     iosArm64()
     iosArm32()
