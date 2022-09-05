@@ -360,18 +360,18 @@ infix fun <T> Property<T>.by(value: T) {
     set(value)
 }
 
-val signingKey = System.getenv("SIGN_KEY_ID")
+/*val signingKey = System.getenv("SIGN_KEY_ID")
 val signingKeyPassphrase = System.getenv("SIGN_KEY_PASSPHRASE")
 
 if (!signingKey.isNullOrBlank()) {
     project.ext["signing.gnupg.keyName"] = signingKey
-    project.ext["signing.gnupg.passphrase"] = signingKeyPassphrase
+    project.ext["signing.gnupg.passphrase"] = signingKeyPassphrase*/
 
     signing {
        // useGpgCmd()
         sign(publishing.publications)
     }
-}
+//}
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
     val nodeM1Version = "16.13.1"
