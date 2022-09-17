@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "org.danbrough.kotlinx"
-version = "0.7.5"
+version = "0.7.5a"
 
 buildscript {
     dependencies {
