@@ -2,7 +2,14 @@
 
 cd $(dirname "$0")
 
-export PUBLISHING_URL="https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+if [ -z "$SONATYPE_REPO_ID" ]; then
+    echo SONATYPE_REPO_ID not set
+    exit 1
+fi
+
+
+export PUBLISHING_URL="https://s01.oss.sonatype.org/service/local/staging/deployByRepositoryId/$SONATYPE_REPO_ID"
+
 export PUBLISHING_USER="danbrough"
 
 if [ -z "$PUBLISHING_PASSWORD" ]; then

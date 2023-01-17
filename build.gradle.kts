@@ -54,16 +54,16 @@ if (hasProperty("releaseVersion")) {
     version = properties["releaseVersion"] as String
 }
 
-val publishingUser = System.getenv("PUBLISHING_USER")
-val publishingPassword = System.getenv("PUBLISHING_PASSWORD")
-val publishingUrl = System.getenv("PUBLISHING_URL")
+val publishingUser = System.getenv("SONATYPE_USER") ?: throw Error("SONATYPE_USER not set")
+val publishingPassword = System.getenv("SONATYPE_PASSWORD") ?: throw Error("SONATYPE_PASSWORD not set")
+val repositoryID = System.getenv("SONATYPE_REPO_ID")
 
 publishing {
     publications {
         repositories {
-            if (publishingUser == null) return@repositories
+            if (repositoryID == null) return@repositories
             maven {
-                url = uri(publishingUrl)
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deployByRepositoryId/$repositoryID")
                 credentials {
                     username = publishingUser
                     password = publishingPassword
@@ -139,6 +139,12 @@ kotlin {
 
     mingwX64()
     linuxX64()
+    linuxArm64()
+    linuxArm32Hfp()
+    androidNativeArm64()
+    androidNativeArm32()
+    androidNativeX86()
+    androidNativeX64()
     iosX64()
     iosArm64()
     iosArm32()
@@ -211,6 +217,12 @@ kotlin {
         val nativeTargets = listOf(
             "mingwX64",
             "linuxX64",
+            "linuxArm32Hfp",
+            "linuxArm64",
+            "androidNativeArm32",
+            "androidNativeArm64",
+            "androidNativeX86",
+            "androidNativeX64",
             "iosX64",
             "iosArm64",
             "iosArm32",
@@ -355,19 +367,19 @@ fun MavenPublication.javadocJar(taskName: String, config: Jar.() -> Unit = {}) =
 infix fun <T> Property<T>.by(value: T) {
     set(value)
 }
-
-val signingKey = System.getenv("SIGN_KEY_ID")
-val signingKeyPassphrase = System.getenv("SIGN_KEY_PASSPHRASE")
-
-if (!signingKey.isNullOrBlank()) {
-    project.ext["signing.gnupg.keyName"] = signingKey
-    project.ext["signing.gnupg.passphrase"] = signingKeyPassphrase
+//
+//val signingKey = System.getenv("SIGN_KEY_ID")
+//val signingKeyPassphrase = System.getenv("SIGN_KEY_PASSPHRASE")
+//
+//if (!signingKey.isNullOrBlank()) {
+//    project.ext["signing.gnupg.keyName"] = signingKey
+//    project.ext["signing.gnupg.passphrase"] = signingKeyPassphrase
 
     signing {
-        useGpgCmd()
+        //useGpgCmd()
         sign(publishing.publications)
     }
-}
+//}
 
 rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
     val nodeM1Version = "16.13.1"
