@@ -13,7 +13,7 @@ plugins {
     id("signing")
 }
 
-group = "org.danborugh.kotlinx"
+group = "org.danbrough.kotlinx"
 version = "0.8.0"
 
 buildscript {
