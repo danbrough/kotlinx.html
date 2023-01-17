@@ -13,8 +13,8 @@ plugins {
     id("signing")
 }
 
-group = "org.jetbrains.kotlinx"
-version = "0.7.5-SNAPSHOT"
+group = "org.danborugh.kotlinx"
+version = "0.8.0"
 
 buildscript {
     dependencies {

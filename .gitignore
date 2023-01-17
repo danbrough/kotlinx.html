@@ -12,3 +12,4 @@ build
 js/src/test/karma/package-lock.json
 
 diffs.txt
+local.properties
